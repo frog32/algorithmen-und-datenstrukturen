@@ -67,3 +67,8 @@ Ein Datenobjekt heisst __elementar__ (__atomar__) wenn es im logischen Sinne nic
 - Ein Programm kann eine Beschreibung eines Algorithmus sein. Es kann sich aber ebenso um eine sinnlose Aneinanderreihung von Operationen handeln.
 - Ein Programm kann (unfreiwillig) fehlerhaft sein, auch wenn der zugrundeliegende Algorithmus korrekt ist.
 - Von einem Algorithmus spricht man nur im Zusammenhang mit einem Problem.
+
+1.6 Programmbibliotheken
+========================
+- Verwenden Sie für Standard-Algorithmen und -Datenstrukturen immer bewährte Programmbibliotheken.
+- Überlegen Sie sich die Umsetzung "besserer" Ideen oder Neuimplementierungen strets sehr gut.

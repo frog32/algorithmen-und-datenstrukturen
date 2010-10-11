@@ -61,3 +61,31 @@ Die __Laufzeit t__ ist eine Funktion der Problemgrösse n.
 
 10% des Codes sind für 90% der Laufzeit verantwortlich.  
 1% des Codes sind für 50% der Laufzeit verantwortlich.
+
+2.3 Laufzeitberechnung - Feinanalyse
+====================================
+
+Bei der **Feinanalyse** betrachtet man einen Algorithmus auf der Ebene einzelner Aktionen.  
+Jede elementare Operation verfügt dabei über einen **relativen Zeitaufwand**.
+
+Definiere Problemgrösse `n = sqrt(n1*n2)`
+
+2.4 Laufzeitberechnung - Grobanalyse
+====================================
+
+Bei der **Grobanalyse** betrachtet man nur die Teile eines Algorithmus, welche das Laufzeitverhalten signifikant beeinflussen. Man unterscheidet je nach Eingabe/Inhalt zwischen drei Fällen:
+
+- **günstigster Fall** (best case)
+- **ungünstigster Fall** (worst case)
+- **durchschnittlicher Fall** (average case)
+
+Beispiel: Bearbeitung einer Dreiecksmatrix
+------------------------------------------
+
+    for i := 1 to n
+        for j := 1 to i
+            A(matrix[i,j])
+        end
+    end
+    
+Algorithmus A wird 1+2+3+4...+n ausgeführt `(n+1)n/2 = (n^2 + n) / 2` --> Laufzeit steigt mit dem Quadrat der Matrizengrösse n.

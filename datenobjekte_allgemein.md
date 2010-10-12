@@ -55,10 +55,11 @@ Auf ihre Bestandteile kann mittels **Zeiger** / **Pointer** / **Referenz** und e
 
 **Allotiation** und **Freigabe** des benötigten Speicherplatzes erfolgt auf dem **dynamischen Speicherbereich** / **Heap**.
 
-var intPtr: →int
-intPtr := New(↓int)
-Write(↓intPtr)      ⇒Speicheradresse
-intPtr→ := 17
-Write(↓intPtr→)     ⇒17
-Dispose(↓intPtr)    ⇒Pointer zeigt immer noch auf die selbe Adresse
-intPtr := null      ⇒Pointer zeigt nirgends mehr hin (nullPointer exception)
+    var intPtr: →int
+    intPtr := New(↓int)
+    Write(↓intPtr)      ⇒Speicheradresse
+    intPtr→ := 17
+    Write(↓intPtr→)     ⇒17
+    Dispose(↓intPtr)    ⇒Pointer zeigt immer noch auf die selbe Adresse
+    intPtr := null      ⇒Pointer zeigt nirgends mehr hin (nullPointer exception)
+

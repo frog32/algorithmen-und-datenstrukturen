@@ -48,8 +48,8 @@ Ein Datenobjekt heisst __elementar__ (__atomar__) wenn es im logischen Sinne nic
     
 1.3. Schnittstellen von Algorithmen
 ===================================
-    CalculateFactorial(pfeilabwärts x:int pfeilaufwärts xf:int)
-    BinominalCoefficient(pfeilabwärts n:int pfeilabwärts k:int) :int
+    CalculateFactorial(↓x:int ↑ xf:int)
+    BinominalCoefficient(↓n:int ↓k:int) :int
 
 1.4. Darstellungsformen für Algorithmen
 =======================================

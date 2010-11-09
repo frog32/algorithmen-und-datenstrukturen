@@ -18,7 +18,7 @@ Entfernen und Einfügen von Elementen in einem Feld:
 ---------------------
 **Verkettete Listen** repräsentieren eine sequentielle Anordnung von **Knoten** / Elementen, deren Reihenfolge explizit durch Verkettung festgelegt ist.  
 Bei **einfach-verketteten** Listen bestimmt ein Zeiger den jeweils nächsten Knoten (**Nachfolger**).  
-Bei **doppelt-vertetteten** Listen bestimmt ein zweiter Zeiger auch den jeweils vorangehenden Knoten (**Vorgänger**).
+Bei **doppelt-verketteten** Listen bestimmt ein zweiter Zeiger auch den jeweils vorangehenden Knoten (**Vorgänger**).
 
     →O→O→O
     jedes Element hat einen Pointer auf den Nachfolger
@@ -41,7 +41,7 @@ Zur Vereinfachung der Listenverarbeitungsalgorithmen bei doppelt-verketteten Lis
 ---------
 4.2.1 Allgemeine Bäume
 ----------------------
-**Bäume** repräsentieren Mengen von Knoten, in denen es jeweils genau einen ausgezeichneten Knoten (**Wurkel**) und eine endliche Menge disjunkter Bäume (**Teilbäume**) gibt, die mit der Wurzel verbunden sind.  
+**Bäume** repräsentieren Mengen von Knoten, in denen es jeweils genau einen ausgezeichneten Knoten (**Wurzel**) und eine endliche Menge disjunkter Bäume (**Teilbäume**) gibt, die mit der Wurzel verbunden sind.  
 Jeder Knoten eines Baumes hat höchstens einen **Vorgänger** aber beliebig viele **Nachfolger**. Knoten ohne Nachfolger bezeichnet man als **Blätter**. Die Höhe eines Baums ist die Länge des Wegs beziehungsweise die Anzahl Verbindungen von der Wurzel bis zum Blatt auf der höchsten Ebene.
 
                                 X           Ebene 0
@@ -69,3 +69,79 @@ Jeder Baum lässt sich in einen Binärbaum transformieren.
           2                     5                 5
                                                     \
                                                      7
+
+4.2.4 Komplexitäten
+-------------------
+
+    SortedInsert(↓1)    1
+    SortedInsert(↓2)     \
+    SortedInsert(↓3)      2
+    SortedInsert(↓4)       \
+    SortedInsert(↓5)        3
+    SortedInsert(↓6)         \
+    SortedInsert(↓7)          4
+                               \
+                                5
+                                 \
+                                  6
+                                   \
+    h = 6                           7
+    
+    SortedInsert(↓4)                  4
+    SortedInsert(↓2)               /     \
+    SortedInsert(↓1)             2         6
+    SortedInsert(↓3)           /   \     /   \
+    SortedInsert(↓6)          1     3   5     7
+    SortedInsert(↓5)
+    SortedInsert(↓7)
+    
+    h=2
+
+Ein **vollständiger Binärbaum** ist ein Binärbaum, in dem jeder Knoten entweder keinen oder genau zwei Nachfolger hat.  
+Ein **perfekter Binärbaum** ist ein vollständiger Binärbaum, in dem alle Blätter auf ein und derselben Ebene liegen. Die Anzahl Knoten eines perfekten Binärbaums beträgt 
+
+    2^k -1 für k=h+1
+    h = ⎡log(n+1) - 1⎤
+
+Binäre Suchbäume, die eher eine einfachverkettete Liste bilden, bezeichnet man als **degenerierte** binäre Suchbäume.
+
+    LZK: O(h) ≅ O(n)
+
+Binäre Suchbäume, denen die Elemente in zufälliger Reihenfolge zugeführt werden, oder die über Mechanismen verfügen, um Degenerationen zu vermeiden, bezeichnet man als balancierte oder als ausgeglichene binäre Suchbäume.
+    
+    LZK: O(h) ≅ O(log n)
+    
+4.3 Stapel
+==========
+
+**Stapel** / **Kellerspeicher** / **Stacks** repräsentieren eine Datenstruktur, in der das jeweils letzte eingefügte Datenobjekt wieder als erstes entnommen wird. Stapel implementieren somit eine **Last In - First Out Strategie (LIFO)**.  
+Für das **Einkellern** sieht man in der Regel eine Methode **push**, für das **Auskellern** eine Methode **pop** vor. Um festzustellen, ob der Kellerspeicher leer bzw. voll ist, verwendet man eine Methode **isEmpty** bzw **isFull**.
+
+    var e:int
+    Push(↓1)
+    Push(↓2)
+    Push(↓3)
+    while not IsEmpty() do
+        Pop(↑e)
+        Write(↓e)
+    end
+    
+    3 2 1
+
+4.4 Warteschlangen
+==================
+
+**Warteschlangen** / **Queues** repräsentieren eine Datenstruktur, in der das jeweils erste eingefügte Datenobjekt auch wieder als erstes entnommen wird. Warteschlangen implementieren somit eine **First in - First out Strategie (FIFO)**.  
+Für das **Einreiehn** / **Einbringen** sieht man in der Regel eine Methode **enqueue**, für das **Entfernen** eine Methode **dequeue** vor. Um festzustellen, ob die Warteschlange leer bzw. voll ist, verwendet man eine Methode **isEmpty** bzw. **isFull**.
+
+    var e:int
+    Enqueue(↓1)
+    Enqueue(↓2)
+    Enqueue(↓3)
+    while not IsEmpty() do
+        Dequeue(↑e)
+        Write(↑e)
+    end
+    
+    1 2 3
+    

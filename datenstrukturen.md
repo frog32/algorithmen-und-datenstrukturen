@@ -25,7 +25,8 @@ Bei **doppelt-verketteten** Listen bestimmt ein zweiter Zeiger auch den jeweils 
     
     →O←→O←→O←→O
     
-    jedes Element hat einen Pointer auf den Nachfolger und einen auf den Vorgänger
+    jedes Element hat einen Pointer auf den Nachfolger und einen auf den
+    Vorgänger
     
 Den Listenknoten ohne (logischen) Vorgänger bezeichnet man als **Kopf**, den **Rest** der Liste als **Schwanz**. Die Listenknoten ohne Nachfolger bezeichnet man als **Ende** der Liste. Sind Kopf und Ende mittels Zeiger verbunden, so ist die Liste **zirkulär** / **zyklisch**.
 

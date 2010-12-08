@@ -41,3 +41,66 @@ Beim **Shell-Sortieren**/**Shell sort** wird das Feld jeweils so "vorsortiert", 
     hs = 2^k
     32, 16, 8, 4, 2, 1
     O(n^2)
+
+
+8.5 Quick Sort
+--------------
+Beim **Quick Sort** wird nach der Strategie Teile und Herrsche das zu sortierende Feld abhängig von einem **Pivotelement x** in zwei Teilfelder aufgeteilt, so dass im linken TeilFeld alle Elemente ≤ x und im rechten Teilfeld alle Elemente ≥ x sind. Diese Teilfelder werden anschliessend rekursiv nach dem gleichen Prinzip weiter aufgeteilt.  
+Es handelt sich um einen instabilen Sortieralgorithmus.
+
+       -------------------------
+    a: |  |  |  |  |  |  |  |  |
+       -------------------------
+                   |
+            ≤ x          ≥ x
+
+    Laufzeitkomplexität:
+
+    Günstigster Fall:
+        Anzahl Schlüsselvergleiche:
+            Scmp(n)=n*log(n)
+        
+        Ungünstigster Fall:
+            Scmp(n)=n^2
+            
+        Durchschnittlicher Fall:
+            Scmp(n)=c*n*log(n)
+
+8.6 Heap Sort
+-------------
+8.6.1 Heap-Datenstruktur
+------------------------
+Ein **Heap** (≠ dynamischer Speicherbereich) ist eine Datenstruktur, die:
+
+*   Zugriff auf das grösste Element in O(1)
+*   einfügen eines Elements in O(log(n))
+*   entfernen des grössten Elements in O(log(n))
+
+erlaubt.  
+Er kann als **kompletter Binärbaum** (d.h. perfekt ausser der "letzten Ebene rechts") oder als Feld realisiert werden.  
+
+*   Implementierung als kompletter Binärbaum:
+    *   Die Wurzel eines Heaps ist grösser oder gleich all ihrer Nachfolger.
+*   Implementierung als Feld h[1...n]:
+    *   Die **Wurzel** ist h[1]
+    *   Der **linke Nachfolger** eines Elements h[i] ist h[2*i]
+    *   Der **rechte Nachfolger** eines Elements h[i] ist h[2*i+1]
+    *   Der Vorgänger des Elements h[i] ist h[i/2]
+    *   Für alle h[i] mit i ≠ 1 gilt:
+        *   h[i] ≤ h[i/2]
+        
+Abbildung im Speicher als Baum oder als Feld
+    
+             13
+           /    \
+         11      7
+        /  \    /
+       3    2  5
+    
+    -------------------------------    
+    | 13 | 11 |  7 |  3 |  2 |  5 |
+    -------------------------------
+
+8.6.2 Heap-Sortieren
+--------------------
+Beim **(Top-Down-)Heap-Sortieren** werden in zwei Phasen zuerst alle Elemente des zu sortierenden Felds mittels Insert der Reihe nach in einen schrittweise anwachsenden Heap eingetragen und anschliessend alle Elemente dem Heap mittels RemoveMax entnommen und von hinten her in das dann sortierte Feld eingetragen.  Es handelt sich um einen instabilen Sortieralgorithmus.

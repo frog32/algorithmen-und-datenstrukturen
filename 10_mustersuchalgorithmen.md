@@ -39,7 +39,7 @@ Laufzeitkomplexität:
     Smax(sLen,pLen) = pLen * (sLen - pLen + 1)
     Savg(sLen,pLen) ~ pLen + sLen
     
-    A.L.K: O(plen*sLen)
+    A.L.K: O(plen+sLen)
     
 10.3 Mustersuchalgorithmen nach Knuth, Morris und Pratt
 -------------------------------------------------------
@@ -80,5 +80,69 @@ Ermittlung der Elemente des next-Felds:
     p:      | a | b | c | a | b | d |
             -------------------------
             -------------------------
-    next:   | 0 | 1 | 1 | 1 | 2 | 3 |
+    next:   | 0 | 1 | 1 | 0 | 1 | 3 |
             -------------------------
+
+
+10.4 Mustersuchalgorithmus nach Robin und Karp
+----------------------------------------------
+Beim **Mustersuchalgorithmus nach Robin und Karp** werden die Hash-Codes hp für die Musterkette p und von vorne weg alle Hash-Codes hs für alle Teilketten von s mit der Länge pLen berechnet und verglichen.
+
+            |       pLen        |
+            ---------------------
+    p:      |                   |
+            ---------------------
+
+                    |   plen    |
+            ----------------------------------
+    p:      |       |           |            |
+            ----------------------------------
+
+
+Als Hash-Funktion wird jedes Zeichen eines Strings als Zahl zur Basis d interpretiert und durch Anwendung des **Horner-Schemas** zu einem numerischen Gesamtwert berechnet.
+
+Beispiel:
+    
+    Zeichenkette "AuD" (ISO-8859-1/Latin 1)
+    
+    => d=256
+    
+    Num("AuD")
+    =((Int(↓'A')*256+Int(↓'u'))*256+Int('D'))
+    =(65*256+117)*256+68
+    
+Implementierung in Pseudocode:
+
+    var hp:int
+        i:int
+    begin
+        hp:=0
+        for i=first to pLast do
+            hp:=(hp*d + Int(↓p[i])) mod q
+        end
+    end
+    
+Berechnung des Hash-Codes für die Position i+1:
+
+    Num(s[i:i+pLen-1]) =    s[i] * d^(pLen-1) +
+                            s[i] * d^(pLen-2) +
+                            ... +
+                            s[i+pLen-1]
+                            
+    Num(s[i+1:i+pLen]) =
+                            (Num(s[i:i+pLen -1])-s[i]*d^(pLen-1))*d
+                            + s[i+pLen]
+
+Implementierung in Pseudocode:
+
+    dp = d^(pLen-1)
+    hs := (hs - Int(↓s[i])*dp) mod q
+    => Problem: evtl. negative Zahlen
+    hs := (hs + d*q - Int(↓s[i])*dp) mod q
+    hs := (hs * d + Int(↓[i+pLen])) mod q
+    
+Laufzeitkomplexität:
+
+    A.L.K:  O(pLen+sLen)    (durchnittlich)
+            o(pLen*sLen)    (theoretisch bei Degeneration)
+    

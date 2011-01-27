@@ -3,6 +3,7 @@
 
 import random
 import exceptions
+import csv
 
 DISTANCES = (
     ( 0, 15, 22, 31,  1),
@@ -11,14 +12,6 @@ DISTANCES = (
     (31, 29, 32,  0,  1),
     ( 1,  1,  2,  1, -3),
 )
-# DISTANCES = (
-#     ( 0, 15, 22, 31,  1, 13),
-#     (15,  0, 12, 29,  1, 16),
-#     (22, 12,  0, 32,  2, 25),
-#     (31, 29, 32,  0,  1, 12),
-#     ( 1,  1,  2,  1, -3, 17),
-#     (13, 16, 25, 12, 17,  0),
-# )
 
 NAMES = ('FCW', 'H+M', 'Visilab', 'Globus', 'Glühwein')
 
@@ -48,6 +41,7 @@ def main(keep_best_count, mutation_factor, rounds, target, stagnate):
     print ""
     print "best found order with cost=%d" % best[0][0]
     print ' '.join(list(NAMES[i] for i in best[0][1]))
+    print ""
 
 def mutate(ways, multiply):
     """shuffles the given ways"""
@@ -67,6 +61,15 @@ def rate(way):
     for i in range(len(way)-1):
         cost += DISTANCES[way[i]][way[i+1]]
     return cost
+    
+def read_file(filename):
+    """reads a csv file and gives distances and names back"""
+    reader = csv.reader(open(filename))
+    names, distances = [], []
+    for row in reader:
+        names.append(row[0].strip())
+        distances.append(tuple(int(value) for value in row[1:]))
+    return names, distances
 
 if __name__ == '__main__':
     import sys
@@ -87,8 +90,8 @@ if __name__ == '__main__':
                 target = int(arg[9:])
             elif arg[0:11] == '--stagnate=':
                 stagnate = int(arg[11:])
-            elif arg in ('',' '):
-                pass
+            elif arg[-4:] == '.csv':
+                NAMES, DISTANCES = read_file(arg)
             else:
                 raise exceptions.ValueError()
     except:

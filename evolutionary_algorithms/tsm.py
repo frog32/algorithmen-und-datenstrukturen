@@ -15,6 +15,8 @@ DISTANCES = (
 
 NAMES = ('FCW', 'H+M', 'Visilab', 'Globus', 'Glühwein')
 
+VERBOSITY = 0
+
 def main(keep_best_count, mutation_factor, rounds, target, stagnate):
     """tries to find the shortest way"""
     ways = [range(len(DISTANCES))]
@@ -25,6 +27,9 @@ def main(keep_best_count, mutation_factor, rounds, target, stagnate):
         for way in ways:
             best.append((rate(way),way))
         best.sort()
+        if VERBOSITY:
+            for way in best:
+                print way
         print "Round %d best way is %s" % (i+1, best[0][0])
         # break if we hit the target
         if best[0][0] <= target:
@@ -90,6 +95,8 @@ if __name__ == '__main__':
                 target = int(arg[9:])
             elif arg[0:11] == '--stagnate=':
                 stagnate = int(arg[11:])
+            elif arg == '-v':
+                VERBOSITY += 1
             elif arg[-4:] == '.csv':
                 NAMES, DISTANCES = read_file(arg)
             else:
@@ -98,7 +105,7 @@ if __name__ == '__main__':
         print """
 This Programm tries to find the shortest way for the traveling salesmen
 Usage:
-tsm [options]
+tsm [options] [inputfile.csv]
 
 --keep=NUM      Keep NUM ways after selecting the best. default=5
 --multiply=NUM  Mutate every way NUM times. default=3
@@ -108,6 +115,8 @@ tsm [options]
                 default=0 (never stop)
 --stagnate=NUM  Stop trying if no better ways were found for NUM rounds.
                 default=10
+                
+-v              Be verbose.
 """
         exit()
             

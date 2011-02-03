@@ -53,11 +53,12 @@ def mutate(ways, multiply):
     mutated=ways[:]
     for way in ways:
         for i in range(multiply):
-            new_way = way[:]
             shuffle = [random.randrange(len(way)),random.randrange(len(way)-1)]
             shuffle[1] = shuffle[1] if shuffle[1]<shuffle[0] else shuffle[1]+1
             shuffle.sort()
-            mutated.append(way[:shuffle[0]]+[way[shuffle[1]]]+way[shuffle[0]+1:shuffle[1]]+[way[shuffle[0]]]+way[shuffle[1]+1:])
+            new_way = way[:shuffle[0]]+[way[shuffle[1]]]+way[shuffle[0]+1:shuffle[1]]+[way[shuffle[0]]]+way[shuffle[1]+1:]
+            if new_way not in mutated:
+                mutated.append(new_way)
     return mutated
 
 def rate(way):
